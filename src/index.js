@@ -1,5 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import 'antd/dist/reset.css';
-ReactDOM.render(<App />, document.getElementById('root'));
+import Router from './router';
+import { Provider } from 'react-redux';
+import store from './store';
+import 'antd/dist/antd.css';
+
+import './styles/index.less';
+import './mock';
+ReactDOM.render(
+  <Provider store={store}>
+    <Router />
+  </Provider>,
+  document.getElementById('root')
+);

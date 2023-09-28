@@ -1,0 +1,3 @@
+export const USER_SET_TOKEN = 'USER_SET_TOKEN';
+export const USER_SET_USER_INFO = 'USER_SET_USER_INFO';
+export const USER_RESET_USER = 'USER_RESET_USER';
