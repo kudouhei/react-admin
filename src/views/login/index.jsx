@@ -4,7 +4,6 @@ import { Form, Icon, Input, Button, message, Spin } from "antd";
 import { connect } from "react-redux";
 import "./index.less";
 import { login, getUserInfo } from "@/store/actions";
-const Item = Form.Item;
 
 
 class Login extends Component {

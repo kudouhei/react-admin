@@ -21,12 +21,14 @@ module.exports = override(
 
   // less-loader
   addLessLoader({
-    // javascriptEnabled: true,
-    // modifyVars: { '@primary-color': '#1DA57A' },
-    lessOptions: {
-      javascriptEnabled: true,
-      modifyVars: { '@primary-color': '#1DA57A' },
-    },
+    javascriptEnabled: true,
+    modifyVars: { '@primary-color': '#1DA57A' },
+    /* 
+    // lessOptions: {
+    //   javascriptEnabled: true,
+    //   modifyVars: { '@primary-color': '#1DA57A' },
+    // },
+    */
   }),
 
   // alias
