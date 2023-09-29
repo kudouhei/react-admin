@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, message, Spin } from "antd";
 import { connect } from "react-redux";
-
 import "./index.less";
-import { login } from "@/store/actionCreator/auth";
-import { getUserInfo } from "@/store/actionCreator/user";
+import { login, getUserInfo } from "@/store/actions";
+const Item = Form.Item;
 
-const Item = Form.Item; 
 
 class Login extends Component {
+  state = {
+    loading: false
+  };
+
   handleSubmit = (event) => {
     // prevent default behavior
     event.preventDefault();
@@ -20,11 +22,37 @@ class Login extends Component {
         // login
         const { username, password } = values;
 
-        this.props.login(username, password);
+        this.login(username, password);
       } else {
         console.log("validate failed!");
       }
     });
+  };
+
+  login = (username, password) => {
+    const { login } = this.props;
+
+    this.setState({loading: true});
+    login(username, password).then((data) => {
+      message.success("success");
+      this.getUserInfo(data.token);
+    })
+    .catch((error) => {
+      this.setState({ loading: false });
+      message.error(error);
+    });
+  };
+
+  getUserInfo = (token) => {
+    const { getUserInfo } = this.props;
+
+    getUserInfo(token)
+      .then((data) => {
+        localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+      })
+      .catch((error) => {
+        message.error(error);
+      });
   };
 
   // password validate
@@ -50,19 +78,14 @@ class Login extends Component {
       return <Redirect to="/home" />;
     }
 
-    const form = this.props.form;
-    const { getFieldDecorator } = form;
+    const { getFieldDecorator } = this.props.form;;
 
     return (
-      <div className="login">
-        <header className="login-header">
-          <h1>React: admin system</h1>
-        </header>
-        <section className="login-content">
-
-          <h2>User Login</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <Item>
+      <div className="login-container">
+        <Form onSubmit={this.handleSubmit} className="content">
+          <div className="title"><h2>Login</h2></div>
+          <Spin spinning={this.state.loading} tip="加载中...">
+            <Form.Item>
               {getFieldDecorator("username", {
                 rules: [
                   {
@@ -86,7 +109,7 @@ class Login extends Component {
                   placeholder="username"
                 />
               )}
-            </Item>
+            </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
                 rules: [
@@ -114,8 +137,8 @@ class Login extends Component {
                 Login
               </Button>
             </Form.Item>
-          </Form>
-        </section>
+          </Spin>
+        </Form>
       </div>
     );
   }

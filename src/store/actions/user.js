@@ -7,7 +7,7 @@ export const getUserInfo = (token) => (dispatch) => {
       .then((response) => {
         const { data } = response;
         if (data.status === 0) {
-          const userInfo = data.data;
+          const userInfo = data.userInfo;
           dispatch(setUserInfo(userInfo));
           resolve(data);
         } else {
@@ -23,7 +23,7 @@ export const getUserInfo = (token) => (dispatch) => {
 
 export const setUserToken = (token) => {
   return {
-    type: types.USER_SET_TOKEN,
+    type: types.USER_SET_USER_TOKEN,
     token,
   };
 };

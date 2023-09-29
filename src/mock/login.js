@@ -3,19 +3,6 @@ const tokens = {
   editor: 'editor-token',
 };
 
-// const users = {
-//   admin: {
-//     role: 'admin',
-//     name: 'admin',
-//     token: 'admin-token',
-//   },
-//   editor: {
-//     role: 'editor',
-//     name: 'editor',
-//     token: 'editor-token',
-//   },
-// };
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   login: (config) => {
@@ -29,7 +16,7 @@ export default {
     }
     return {
       status: 0,
-      data: token,
+      token,
     };
   },
   logout: (_) => {

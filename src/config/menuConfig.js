@@ -4,8 +4,6 @@ const menuList = [
     path: '/home',
     meta: {
       icon: 'home',
-      isPublic: true,
-      hidden: false,
       roles: ['admin'],
     },
   },
@@ -14,10 +12,16 @@ const menuList = [
     path: '/doc',
     meta: {
       icon: 'home',
-      isPublic: true,
-      hidden: true,
-      roles: ['editor'],
     },
+    children: [
+      {
+        title: '404',
+        path: '/error/404',
+        meta: {
+          icon: 'home',
+        },
+      },
+    ],
   },
 ];
 export default menuList;
