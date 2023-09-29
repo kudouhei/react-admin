@@ -4,13 +4,14 @@ import { Icon, Menu, Dropdown, Button, Modal } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import { logout } from "@/store/actionCreator/auth";
 import "./index.less";
+
 class NavBar extends Component {
   logout = (token) => {
     Modal.confirm({
-      title: '注销',
-      content: "确定要退出系统吗?",
-      okText: '确定',
-      cancelText: '取消',
+      title: 'logout',
+      content: "quit the system?",
+      okText: 'Ok',
+      cancelText: 'Cancel',
       onOk: () => {
         this.props.logout(token);
       },
@@ -29,10 +30,10 @@ class NavBar extends Component {
     const menu = (
       <Menu onClick={this.onClick}>
         <Menu.Item key="0">
-          <Link to="/home">首页</Link>
+          <Link to="/home">Home</Link>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="logout">注销</Menu.Item>
+        <Menu.Item key="logout">Logout</Menu.Item>
       </Menu>
     );
     return (
@@ -40,7 +41,7 @@ class NavBar extends Component {
         <div className="right-menu">
           <Dropdown overlay={menu}>
             <div className="avatar-wrapper">
-              欢迎,
+              Welcome,
               <Button type="link">
                 {this.props.name}
                 <Icon type="down" />

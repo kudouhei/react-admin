@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import NavBar from './NavBar';
 import NavMenu from './NavMenu';
 import { Layout } from 'antd';
+import { getUserInfo } from '@/store/actionCreator/user';
 import './index.less';
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -20,7 +21,7 @@ class Main extends Component {
   componentWillMount() {
     console.log('props:', this.props);
 
-    // this.props.getUserInfo(this.props.token);
+    this.props.getUserInfo(this.props.token);
   }
 
   render() {
@@ -51,4 +52,4 @@ class Main extends Component {
   }
 }
 
-export default connect((state) => state.user)(Main);
+export default connect((state) => state.user, { getUserInfo })(Main);
